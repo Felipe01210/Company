@@ -11,6 +11,7 @@ import com.jacaranda.utility.BDConection;
 //IF THE METHOD DOESN`T WORK FOR AN ESPECIFIC CLASS, CREATE AN ESPECIFIC REPOSITORY
 public class GenericRepository {
 	
+	//Conseguir un unico objeto por su id tipo Integer
 	public static <T> T find(Class<T> c, Integer id) throws Exception{
 		Transaction transaction = null;
 		Session session;
@@ -27,7 +28,44 @@ public class GenericRepository {
 		}
 		return result;
 	}
+	
+	//Conseguir un unico objeto por su id tipo String -- CREADO PARA USER PERO SIRVE PARA CUALQUIER CLASE CON CADENA DE TEXTO COMO PK
+		public static <T> T find(Class<T> c, String id) throws Exception{
+			Transaction transaction = null;
+			Session session;
+			T result;
+			try {
+				session = BDConection.getSessionFactory().openSession();
+			}catch(Exception e) {
+				throw new Exception("error en la base de datos");
+			}
+			try {
+				result = (T) session.find(c, id);
+			}catch(Exception e) {
+				throw new Exception("error en find");
+			}
+			return result;
+		}
+	
+	//Conseguir un unico objeto por objeto (construido solo con ids) -- NO PARECE FUNCIONAR
+	public static <T> T find(Class<T> c,T object) throws Exception{
+		Transaction transaction = null;
+		Session session;
+		T result;
+		try {
+			session = BDConection.getSessionFactory().openSession();
+		}catch(Exception e) {
+			throw new Exception("error en la base de datos");
+		}
+		try {
+			result = (T) session.find(c, object);
+		}catch(Exception e) {
+			throw new Exception("error en find");
+		}
+		return result;
+	}
 
+	//Conseguir toda la lista de una misma clase
 	public static <T> List<T> findAll(Class<T> c) throws Exception{
 		Transaction transaction = null;
 		Session session;

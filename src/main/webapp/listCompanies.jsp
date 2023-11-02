@@ -3,6 +3,7 @@
 <%@ page import="com.jacaranda.model.Company" %>
 <%@ page import="com.jacaranda.repository.GenericRepository" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.jacaranda.model.User" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,9 @@
 
 <%
 
+User currentUser = (User) session.getAttribute("user");
+boolean loged = (Boolean) session.getAttribute("login");
+
 ArrayList<Company> result = null;
 
 try{
@@ -25,6 +29,21 @@ try{
 }
 
 %>
+
+<%if(!loged){
+	
+	session.setAttribute("msg","not loged");
+	response.sendRedirect("index.js");
+	
+}else{
+	
+	if(currentUser.getRole().equals("ADMIN")){%>
+		<form action="addCompanie.jsp" method="get">
+			<button type="submit">Añadir Compañia</button>
+		</form>
+	<%}
+	
+}%>
 
 <table>
 	<thead>
