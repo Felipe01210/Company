@@ -3,7 +3,6 @@
 <%@ page import="com.jacaranda.model.Company" %>
 <%@ page import="com.jacaranda.repository.GenericRepository" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.jacaranda.model.User" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,11 +12,9 @@
 <body>
 
 <!-- Convertir a lista de tarjetas con el siguiente formato de la imagen -->
-<!-- user @include para insertar la lista de empleados y de proyectos, que seran jsp externos -->
 
 <%
 
-User currentUser = (User) session.getAttribute("user");
 boolean loged = (Boolean) session.getAttribute("login");
 
 ArrayList<Company> result = null;
@@ -29,21 +26,6 @@ try{
 }
 
 %>
-
-<%if(!loged){
-	
-	session.setAttribute("msg","not loged");
-	response.sendRedirect("index.js");
-	
-}else{
-	
-	if(currentUser.getRole().equals("ADMIN")){%>
-		<form action="addCompanie.jsp" method="get">
-			<button type="submit">Añadir Compañia</button>
-		</form>
-	<%}
-	
-}%>
 
 <table>
 	<thead>

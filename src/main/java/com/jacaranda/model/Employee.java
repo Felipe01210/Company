@@ -27,6 +27,10 @@ public class Employee {
 	private String gender;
 	@Column(name="dateOfBirth")
 	private Date dateOfBirth;
+	@Column(name="password")
+	private String password;
+	@Column(name="role")
+	private String role;
 	@ManyToOne
 	@JoinColumn(name="idCompany")
 	private Company employeeCompany;
@@ -97,6 +101,22 @@ public class Employee {
 
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public Company getEmployeeCompany() {
