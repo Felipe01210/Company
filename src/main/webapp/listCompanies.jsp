@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.jacaranda.model.Company" %>
+<%@ page import="com.jacaranda.model.Employee" %>
+<%@ page import="com.jacaranda.model.Project" %>
+<%@ page import="com.jacaranda.model.CompanyProject" %>
 <%@ page import="com.jacaranda.repository.GenericRepository" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
@@ -27,34 +30,46 @@ try{
 
 %>
 
+<header>
+
+<a href="listProjects.jsp">Ver proyectos</a>
+
+</header>
+
+<%for(Company c: result){ %>
+
 <table>
-	<thead>
-		<tr>
-			<th>ID</th>
-			<th>Name</th>
-			<th>Address</th>
-			<th>City</th>
-			<th>Employees</th>
-			<th></th>
-			<th>Projects</th>
-			<th></th>
-		</tr>
-	</thead>
-	
-	<%for(Company e: result){ %>
 	<tr>
-		<td><%=e.getId() %></td>
-		<td><%=e.getName() %></td>
-		<td><%=e.getAddress() %></td>
-		<td><%=e.getCity() %></td>
-		<td><%=e.getEmployees().size() %></td>
-		<td><a href="http://localhost:8080/Company/listEmployees.jsp?idCompany=<%=e.getId() %>">Ver empleados</a></td>
-		<td><%=e.getProjects().size() %></td>
-		<td><a href="http://localhost:8080/Company/listProjects.jsp?idCompany=<%=e.getId() %>">Ver proyectos</a></td>
+		<td><h4><%=c.getName() %></h4></td>
+		<td><h4>Empleados: <%=c.getEmployees().size() %></h4></td>
+		<td><h4>Proyectos: <%=c.getProjects().size() %></h4></td>
 	</tr>
-	<%}; %>
-	
+	<tr>
+		<td colspan=3><h4>Listado de empleados</h4></td>
+	</tr>
+	<tr> <!-- for empleados -->
+		<%for(Employee e: c.getEmployees()){ %>
+		<td colspan=3><p><%=e.getId() %> : <%=e.getFirstName() %></p></td>
+		<%} %>
+	</tr>
+	<tr>
+		<td colspan=3>
+			<h4>Listado de proyectos</h4>
+			<form action="listProjects.jsp">
+				<button type="submit"></button>
+			</form>
+		</td>
+	</tr>
+	<tr> <!-- for proyectos -->
+		<%for(CompanyProject cp: c.getProjects()) {%>
+		<td colspan=3>
+		<p><%=cp.getIdProject().getId() %> : <%=cp.getIdProject().getName() %></p>
+		</td>
+		<%} %>
+	</tr>
 </table>
+
+<%}%>
 
 </body>
 </html>

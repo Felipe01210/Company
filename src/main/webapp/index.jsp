@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.jacaranda.repository.GenericRepository" %>
+<%@ page import="com.jacaranda.repository.EmployeeRepository" %>
 <%@ page import="com.jacaranda.model.Employee" %>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,24 @@ session.setAttribute("login", false);
 
 if(request.getParameter("username") != null && request.getParameter("password") != null){
 
+	String username = request.getParameter("username");
+	String password = request.getParameter("password");
 	
+	try{
+		Employee currentEmployee = EmployeeRepository.findByName(username);
+		if(!password.equals(currentEmployee.getPassword())){
+			session.setAttribute("msg", null);
+			session.setAttribute("login", true);
+			session.setAttribute("currentEmployee", currentEmployee);
+			response.sendRedirect("listCompanies.jsp");
+			return;
+		}else{
+			session.setAttribute("msg", "Empleado o contraseña incorrecta");
+			return;
+		}
+	}catch(Exception e){
+		e.getMessage();
+	}
 
 }else{ //si no encuentra parametros para username y password, carga el formulario
 //inicio de sesion con empleado (mod bd)
@@ -45,9 +63,9 @@ if(request.getParameter("username") != null && request.getParameter("password") 
 
 <h1>Log In</h1>
 <hr>
-<%if() {%>
+<%if(session.getAttribute("msg")!=null) {%>
 
-<h2><%= %></h2>
+<h2><%=session.getAttribute("msg") %></h2>
 
 <%}%>
 <form action="index.jsp" method="get">
