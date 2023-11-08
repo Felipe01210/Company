@@ -1,15 +1,14 @@
 package com.jacaranda.model;
 
 import java.util.List;
+import java.util.Map;
 
 public class WorkingList {
 	
 	private int employeeId;
-	private List<Project> workList;
+	private Map<Project, Integer> workList;
 	
-	public void addProject(Project project) {
-		this.workList.add(project);
-	}
+	
 	
 	public int getEmployeeId() {
 		return employeeId;
@@ -17,10 +16,10 @@ public class WorkingList {
 	public void setEmployeeId(int employeeId) {
 		this.employeeId = employeeId;
 	}
-	public List<Project> getWorkList() {
+	public Map<Project, Integer> getWorkList() {
 		return workList;
 	}
-	public void setWorkList(List<Project> workList) {
+	public void setWorkList(Map<Project, Integer> workList) {
 		this.workList = workList;
 	}
 	
