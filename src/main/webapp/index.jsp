@@ -39,12 +39,12 @@ if(request.getParameter("username") != null && request.getParameter("password") 
 	}
 
 }else{ //si no encuentra parametros para username y password, carga el formulario
-//inicio de sesion con empleado (mod bd)
+//inicio de sesion con empleado (mod bd) --
 //comprobacion de request != null --
-//comprobacion de que existe el usuario
-//si existe: comprobacion de la contraseña
-//guardar usuario en session
-//preparar validacion y errores en esta misma pagina
+//comprobacion de que existe el usuario --
+//si existe: comprobacion de la contraseña --
+//guardar usuario en session --
+//preparar validacion y errores en esta misma pagina --
 
 //si todo esta bien pasamos a la lista de compañias (modificar lista de compañias para que sea la tabla con empleados y proyectos)
 //hacer el CRUD completo de las empresas -- solo accesible para el empleado con rol ADMIN
