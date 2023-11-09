@@ -47,11 +47,11 @@ try{
 	<tr>
 		<td colspan=3><h4>Listado de empleados</h4></td>
 	</tr>
+	<%for(Employee e: c.getEmployees()){ %>
 	<tr> <!-- for empleados -->
-		<%for(Employee e: c.getEmployees()){ %>
 		<td colspan=3><p><%=e.getId() %> : <%=e.getFirstName() %></p></td>
-		<%} %>
 	</tr>
+	<%} %>
 	<tr>
 		<td colspan=3>
 			<h4>Listado de proyectos</h4>
@@ -60,13 +60,13 @@ try{
 			</form>
 		</td>
 	</tr>
+	<%for(CompanyProject cp: c.getProjects()) {%>
 	<tr> <!-- for proyectos -->
-		<%for(CompanyProject cp: c.getProjects()) {%>
 		<td colspan=3>
 		<p><%=cp.getIdProject().getId() %> : <%=cp.getIdProject().getName() %></p>
 		</td>
-		<%} %>
 	</tr>
+	<%} %>
 </table>
 
 <%}%>

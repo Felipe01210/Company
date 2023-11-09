@@ -8,7 +8,9 @@ public class WorkingList {
 	private int employeeId;
 	private Map<Project, Date> workList;
 	
-	
+	public void addWork(Project project, Date workBegin) {
+		this.workList.put(project, workBegin);
+	}
 	
 	public int getEmployeeId() {
 		return employeeId;
@@ -22,7 +24,5 @@ public class WorkingList {
 	public void setWorkList(Map<Project, Date> workList) {
 		this.workList = workList;
 	}
-	
-	
 
 }

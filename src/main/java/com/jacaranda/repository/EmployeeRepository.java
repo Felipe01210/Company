@@ -19,9 +19,9 @@ public class EmployeeRepository {
 			throw new Exception("error en la base de datos");
 		}
 		try {
-			SelectionQuery<Employee> q = session.createSelectionQuery("From Employee where name := name", Employee.class);
-			q.setParameter("name", name);
-			result = q.getSingleResult();
+			SelectionQuery<Employee> q = session.createSelectionQuery("From Employee where firstName = :firstName", Employee.class);
+			q.setParameter("firstName", name);
+			result = q.uniqueResult();
 		}catch(Exception e) {
 			throw new Exception("error en find");
 		}
