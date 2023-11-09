@@ -24,10 +24,11 @@ if(request.getParameter("username") != null && request.getParameter("password") 
 	
 	try{
 		Employee currentEmployee = EmployeeRepository.findByName(username);
-		if(password != (currentEmployee.getPassword())){
+		if(password !=(currentEmployee.getPassword())){
+			session.setAttribute("msg", null);
 			session.setAttribute("login", true);
 			session.setAttribute("currentEmployee", currentEmployee);
-			response.sendRedirect("./listCompanies.jsp");
+			response.sendRedirect("listCompanies.jsp");
 			return;
 		}else{
 			session.setAttribute("msg", "Empleado o contraseña incorrecta");
@@ -62,6 +63,11 @@ if(request.getParameter("username") != null && request.getParameter("password") 
 
 <h1>Log In</h1>
 <hr>
+<%if(session.getAttribute("msg")!=null) {%>
+
+<h2><%=session.getAttribute("msg") %></h2>
+
+<%}%>
 <form action="index.jsp" method="get">
 <label>First Name</label>
 <input type="text" name="username" required>
