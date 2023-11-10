@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.jacaranda.repository.GenericRepository" %>
 <%@ page import="com.jacaranda.repository.EmployeeRepository" %>
+<%@ page import="com.jacaranda.model.WorkingList" %>
 <%@ page import="com.jacaranda.model.Employee" %>
 <!DOCTYPE html>
 <html>
@@ -28,6 +29,11 @@ if(request.getParameter("username") != null && request.getParameter("password") 
 			session.setAttribute("msg", null);
 			session.setAttribute("login", true);
 			session.setAttribute("currentEmployee", currentEmployee);
+			//Creacion de la working list para el empleado
+			WorkingList workingList = new WorkingList();
+			workingList.setEmployee(currentEmployee);
+			session.setAttribute("workingList", workingList);
+			
 			response.sendRedirect("listCompanies.jsp");
 			return;
 		}else{

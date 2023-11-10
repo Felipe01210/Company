@@ -46,24 +46,6 @@ public class GenericRepository {
 			}
 			return result;
 		}
-	
-	//Conseguir un unico objeto por objeto (construido solo con ids) -- NO PARECE FUNCIONAR
-	public static <T> T find(Class<T> c,T object) throws Exception{
-		Transaction transaction = null;
-		Session session;
-		T result;
-		try {
-			session = BDConection.getSessionFactory().openSession();
-		}catch(Exception e) {
-			throw new Exception("error en la base de datos");
-		}
-		try {
-			result = (T) session.find(c, object);
-		}catch(Exception e) {
-			throw new Exception("error en find");
-		}
-		return result;
-	}
 
 	//Conseguir toda la lista de una misma clase
 	public static <T> List<T> findAll(Class<T> c) throws Exception{
@@ -82,4 +64,23 @@ public class GenericRepository {
 		}
 		return resultList;
 	}
+	
+	//Merge de un objeto
+	public static <T> T updateOrSave(Class<T> c, T object) throws Exception{
+		Transaction transaction = null;
+		Session session;
+		T result;
+		try {
+			session = BDConection.getSessionFactory().openSession();
+		}catch(Exception e) {
+			throw new Exception("error en la base de datos");
+		}
+		try {
+			result = session.merge(object);
+		}catch(Exception e) {
+			throw new Exception("error en merge");
+		}
+		return result;
+	}
+	
 }
