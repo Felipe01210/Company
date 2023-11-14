@@ -52,7 +52,6 @@ if(request.getParameter("project")!=null){
 }
 
 if(session.getAttribute("currentEmployee") != null){
-	Employee currentEmployee = (Employee) session.getAttribute("currentEmployee");
 	List<EmployeeProject> listProjects = currentEmployee.getProjects(); %>
 	
 	<%if(listProjects.size() > 0){ %>
@@ -77,7 +76,7 @@ if(session.getAttribute("currentEmployee") != null){
 	<button type="submit">Trabajar</button>
 	</form>
 	
-	<%else{ %>
+	<%}else{ %>
 	
 	<form>
 	<input name="project" value="<%=project.getIdProject().getId() %>" hidden>
@@ -91,7 +90,8 @@ if(session.getAttribute("currentEmployee") != null){
 	
 	</ul>
 	
-	<%}else{ %>
+	<%
+	}else{ %>
 	
 	<h1>El empleado <%=currentEmployee.getFirstName() %> no tiene asignado ningun proyecto</h1>
 	
@@ -101,12 +101,11 @@ if(session.getAttribute("currentEmployee") != null){
 	<button type="submit">Asignar nuevos proyectos</button>
 	</form>
 	
-	
-<%}else{
+<%
+	}else{
 	response.sendRedirect("index.js");
 	return;
-}
-
+	}
 %>
 
 </body>
